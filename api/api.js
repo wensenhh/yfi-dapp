@@ -142,3 +142,16 @@ export function getCoinPrice(data) {
 		data
 	})
 }
+
+/**
+ * 获取用户余额
+ * @param {*} data 
+ */
+export function getUserBalance(data) {
+	return service({
+		url: '/Product/getUsermoney',
+		method: 'post',
+		params: {},
+		data
+	})
+}

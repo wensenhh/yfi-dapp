@@ -3,7 +3,7 @@
 // const IP = 'api.ziwuyin.com';
 
 //正式
-const IP = 'user.xier.space';
+const IP = 'user.parisn.club';
 
 
 var ISHTTPS = false;

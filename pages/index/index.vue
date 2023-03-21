@@ -39,6 +39,7 @@
 				<view class="pledgebox-item">
 					<view class="pledgebox-item-toptt">
 						CORE<image src="../../static/core.png" mode=""></image>
+						<span>余额：{{userbalance.core_num || '正在获取中~'}}</span>
 					</view>
 					<view class="pledgebox-item-iptbox">
 						<input type="number" v-model="corenum" :placeholder="$t('index.placeholder')">
@@ -47,6 +48,7 @@
 				<view class="pledgebox-item">
 					<view class="pledgebox-item-toptt">
 						YFI<image src="../../static/YFI.png" mode=""></image>
+						<span>余额：{{userbalance.yfi_num || '正在获取中~'}}</span>
 					</view>
 					<view class="pledgebox-item-iptbox">
 						<input type="number" v-model="yfinum" :placeholder="$t('index.placeholder')">
@@ -56,7 +58,9 @@
 					<image src="../../static/jiahao.png" mode=""></image>
 				</view>
 				<view class="pledgebox-Time">
-					<view :class="item.actived ? 'active' : ''" v-for="(item,i) in pledgeTime" @tap="changeTime(i)">{{item.name}} {{$t('index.day')}}</view><!--  -->
+					<view :class="item.actived ? 'active' : ''" v-for="(item,i) in pledgeTime" @tap="changeTime(i)">
+						{{item.name}} {{$t('index.day')}}
+					</view><!--  -->
 				</view>
 				<view class="pledgebox-btnbox" v-if="!approveFlag" @click="ApproveYFI">
 					{{$t('index.authorization')}}
@@ -66,7 +70,7 @@
 				</view>
 			</view>
 		</view>
-		
+
 		<view class="sidebox">
 			<view class="tabbarbox">
 				<view class="active">{{$t('index.my') + $t('index.pledge')}}</view>
@@ -79,7 +83,8 @@
 		</view>
 		<uni-popup ref="langpopup" type="bottom">
 			<view class="langbox">
-				<view :class="nowlangcode == item.code ? 'active' : ''" v-for="item in locales" @click="onLocaleChange(item)">{{item.text}}</view>
+				<view :class="nowlangcode == item.code ? 'active' : ''" v-for="item in locales"
+					@click="onLocaleChange(item)">{{item.text}}</view>
 				<view @click="$refs.langpopup.close()">
 					{{$t('index.cancel')}}
 				</view>
@@ -91,7 +96,17 @@
 <script>
 	import uniPopup from '@/components/uni-popup/uni-popup.vue';
 	import pledgeCard from '@/components/pledgeCard/pledgeCard.vue';
-	import { Login, getNewNotice, getPledgeTimes, getPledgeId, getPledgeHome, getEarnings, getRedemption, getCoinPrice } from '@/api/api.js';
+	import {
+		Login,
+		getNewNotice,
+		getPledgeTimes,
+		getPledgeId,
+		getPledgeHome,
+		getEarnings,
+		getRedemption,
+		getCoinPrice,
+		getUserBalance
+	} from '@/api/api.js';
 	const Web3 = require("@/common/getWeb3");
 	import web3utils from '@/common/web3Utils.js';
 	import {
@@ -111,13 +126,13 @@
 				pledgeTime: [{
 					value: 1,
 					actived: true
-				},{
+				}, {
 					value: 10,
 					actived: false
-				},{
+				}, {
 					value: 30,
 					actived: false
-				},{
+				}, {
 					value: 100,
 					actived: false
 				}],
@@ -129,27 +144,35 @@
 				corenum: null,
 				yfinum: null,
 				userPrice: {},
+				userbalance: {
+					core_num: null,
+					yfi_num: null
+				},
 				pledgeTimeid: null
 			}
 		},
 		watch: {
-			corenum(newval,oldval){
-				if(!this.userPrice.core || !this.userPrice.yfi){
+			corenum(newval, oldval) {
+				if (!this.userPrice.core || !this.userPrice.yfi) {
 					return this.$tools.toast('未获取到价格，请等待一会后重试~')
 				}
-				if(!Number.isInteger(Number(newval))){
+				if (!Number.isInteger(Number(newval))) {
 					// return this.$tools.toast('请输入正整数~')
-				}else{
-					console.log('计算yfi数量=' , this.$tools.accDiv(this.$tools.accMul(newval,this.userPrice.core), this.userPrice.yfi))
-					this.yfinum = this.$tools.accDiv(this.$tools.accMul(newval,this.userPrice.core), this.userPrice.yfi).toFixed(4)
+				} else {
+					console.log('计算yfi数量=', this.$tools.accDiv(this.$tools.accMul(newval, this.userPrice.core), this
+						.userPrice.yfi))
+					this.yfinum = this.$tools.accDiv(this.$tools.accMul(newval, this.userPrice.core), this.userPrice.yfi)
+						.toFixed(4)
 				}
 			},
-			yfinum(newval,oldval){
-				if(!Number.isInteger(Number(newval))){
+			yfinum(newval, oldval) {
+				if (!Number.isInteger(Number(newval))) {
 					// return this.$tools.toast('请输入正整数~')
-				}else{
-					console.log('计算core数量=' , this.$tools.accDiv(this.$tools.accMul(newval,this.userPrice.yfi), this.userPrice.core))
-					this.corenum = this.$tools.accDiv(this.$tools.accMul(newval,this.userPrice.yfi), this.userPrice.core).toFixed(4)
+				} else {
+					console.log('计算core数量=', this.$tools.accDiv(this.$tools.accMul(newval, this.userPrice.yfi), this
+						.userPrice.core))
+					this.corenum = this.$tools.accDiv(this.$tools.accMul(newval, this.userPrice.yfi), this.userPrice.core)
+						.toFixed(4)
 				}
 			},
 		},
@@ -181,49 +204,42 @@
 			})
 			// 获取地址
 			uni.setStorageSync('address', "");
+			uni.setStorageSync('token', '')
 			this.address = await this.$tools.getAddress()
-			if (!!uni.getStorageSync('token')){
-				if(window.web3.utils){
-					that.init()
-				}else{
-					that.getWeb3fun(() => {
+
+			if (!!this.address) {
+				uni.setStorageSync('address', this.address);
+				that.getLogin(() => {
+					if (window.web3.utils) {
 						that.init()
-					})
-				}
-			}else{
-				if (!!this.address) {
-					uni.setStorageSync('address', this.address);
-					that.getLogin(() => {
-						if(window.web3.utils){
+					} else {
+						that.getWeb3fun(() => {
 							that.init()
-						}else{
-							that.getWeb3fun(() => {
-								that.init()
-							})
-						}
-					})
-				}else {
-					this.$tools.toast('钱包地址获取失败~')
-				}
+						})
+					}
+				})
+			} else {
+				this.$tools.toast('钱包地址获取失败~')
 			}
 		},
 		methods: {
-			init(){
+			init() {
 				this.allowance()
-				this.getHomeNotice()//首页最新公告
-				this.getPledgeTimes()//首页质押天数
-				this.getUserPrice()//获取代币价格
-				this.getHomePledge()//获取首页质押订单
-				this.accountfn()// 监测是否切换钱包
+				this.getHomeNotice() //首页最新公告
+				this.getPledgeTimes() //首页质押天数
+				this.getUserPrice() //获取代币价格
+				this.getHomePledge() //获取首页质押订单
+				this.accountfn() // 监测是否切换钱包
+				this.getBalance() // 获取用户余额
 			},
 			getWeb3fun(callback) {
 				let that = this
-			    // web3前面必须有window
-			    Web3.default.getWeb3().then((res) => {
+				// web3前面必须有window
+				Web3.default.getWeb3().then((res) => {
 					window.web3 = res;
 					console.log("getWeb3", res);
 					return callback && callback()
-			    })
+				})
 			},
 			// 监测是否切换钱包
 			async accountfn() {
@@ -236,13 +252,20 @@
 				});
 			},
 			// 质押
-			async pledgefun(){
-				if(!this.corenum || !this.yfinum || this.corenum <= 0){
+			async pledgefun() {
+				if (!this.corenum || !this.yfinum || this.corenum <= 0) {
 					return this.$tools.toast(this.$t('index.ipttokennum'))
+				}
+				if (Number(this.corenum) < 1) {
+					return this.$tools.toast('必须质押1CORE币以上~')
+				}
+				if (Number(this.corenum) > Number(this.userbalance.core_num).toFixed(4) || Number(this.yfinum) >
+					Number(this.userbalance.yfi_num).toFixed(4)) {
+					return this.$tools.toast('余额不足~')
 				}
 				uni.showLoading({
 					title: this.$t('index.pledgeing'),
-					mask:true
+					mask: true
 				})
 				let that = this
 				await getPledgeId({
@@ -273,13 +296,13 @@
 				})
 			},
 			// 赎回
-			getredemption(id){
+			getredemption(id) {
 				let that = this;
 				uni.showModal({
 					title: '提示',
 					content: that.$t('index.getredemptionanswers'),
 					success(res) {
-						if(res.confirm){
+						if (res.confirm) {
 							getRedemption({
 								id: id
 							}).then(res => {
@@ -293,13 +316,13 @@
 				})
 			},
 			// 领取收益
-			getearnings(id){
+			getearnings(id) {
 				let that = this;
 				uni.showModal({
 					title: '提示',
 					content: that.$t('index.getpledgeanswers'),
 					success(res) {
-						if(res.confirm){
+						if (res.confirm) {
 							getEarnings({
 								id: id
 							}).then(res => {
@@ -312,7 +335,16 @@
 					}
 				})
 			},
-			getHomePledge(){
+			getBalance() {
+				getUserBalance().then(res => {
+					let web3 = window.web3
+					this.userbalance = {
+						core_num: Number(web3.utils.fromWei(res.data.eth_num.toString(), "ether")).toFixed(4),
+						yfi_num: Number(web3.utils.fromWei(res.data.yfinum.toString(), "ether")).toFixed(4)
+					}
+				})
+			},
+			getHomePledge() {
 				getPledgeHome().then(res => {
 					this.pledgeList = res.data
 				})
@@ -327,16 +359,16 @@
 				web3utils.approve(data, function() {
 					that.approveFlag = true;
 					that.allowance()
-					that.$tools.toast('Authorize succeeded',true)
+					that.$tools.toast('Authorize succeeded', true)
 				})
 			},
-			getUserPrice(){
+			getUserPrice() {
 				let that = this
 				getCoinPrice().then(res => {
 					that.userPrice = res.data
 				})
 			},
-			getLogin(callback){
+			getLogin(callback) {
 				Login({
 					account: this.address
 				}).then(res => {
@@ -347,17 +379,19 @@
 					console.error('登录结果:', err);
 				})
 			},
-			getHomeNotice(){
-				getNewNotice({name: 'wensen'}).then(res => {
+			getHomeNotice() {
+				getNewNotice({
+					name: 'wensen'
+				}).then(res => {
 					this.noticeObj = res.data
 				}).catch(err => {
 					console.error('结果:', err);
 				})
 			},
-			getPledgeTimes(){
+			getPledgeTimes() {
 				getPledgeTimes().then(res => {
 					let list = res.data.list;
-					list.forEach((item,i) => {
+					list.forEach((item, i) => {
 						i === 0 ? item.actived = true : item.actived = false
 					})
 					this.pledgeTimeid = list[0].id
@@ -373,26 +407,26 @@
 					var MyContract = web3utils.createContract(tokenabi, yfiaddr, this.address)
 					MyContract.methods.allowance(this.address, pledge).call().then(
 						res => {
-						let n = web3.utils.fromWei(res, "ether");
-						 console.log("授权数量==",n);
-						 this.approveFlag = n >= 100000000;
-					})
+							let n = web3.utils.fromWei(res, "ether");
+							console.log("授权数量==", n);
+							this.approveFlag = n >= 100000000;
+						})
 				} catch (error) {
 					// this.allowanceBalance = 0;
 					console.error("trigger smart contract error", error)
 				}
 			},
-			openlangpop(){
+			openlangpop() {
 				this.$refs.langpopup.open()
 			},
-			navgoto(url){
+			navgoto(url) {
 				uni.navigateTo({
 					url: url
 				})
 			},
-			changeTime(i){
+			changeTime(i) {
 				let arr = this.pledgeTime
-				arr.forEach((item,index) => {
+				arr.forEach((item, index) => {
 					index === i ? item.actived = true : item.actived = false
 				})
 				this.pledgeTimeid = arr[i].id
@@ -425,16 +459,20 @@
 <style lang="scss">
 	.container {
 		background-color: #F8F8F8;
-		>view{
+
+		>view {
 			padding: 0 32rpx;
 		}
-		.pagewhite{
+
+		.pagewhite {
 			background-color: #FFFFFF;
 			padding-bottom: 24rpx
 		}
+
 		.headerbox {
 			@include flexBetween;
 			padding: 16rpx 0;
+
 			&-left {
 				@include flexCenter;
 
@@ -463,20 +501,24 @@
 
 			}
 		}
-		.topbox{
+
+		.topbox {
 			@include flexLeftColumn;
 			margin-top: 24rpx;
-			&-title{
+
+			&-title {
 				font-size: 48rpx;
 				font-weight: bolder;
 				color: #006AE3;
 			}
-			&-address{
+
+			&-address {
 				font-size: 30rpx;
 				color: #545454;
 			}
 		}
-		.noticebox{
+
+		.noticebox {
 			@include threeflexLayout;
 			background-color: #F8F8F8;
 			width: 100%;
@@ -485,7 +527,8 @@
 			padding: 24rpx;
 			margin-top: 48rpx;
 			box-sizing: border-box;
-			&-center{
+
+			&-center {
 				transition: 1s all;
 				font-size: 30rpx;
 				color: #000000;
@@ -493,58 +536,75 @@
 				overflow-x: auto;
 				white-space: nowrap;
 			}
-			>view{
-				&:first-child{
+
+			>view {
+				&:first-child {
 					margin-right: 10rpx;
-					image{
+
+					image {
 						width: 48rpx;
 						height: 48rpx;
 					}
 				}
-				
-				&:last-child{
+
+				&:last-child {
 					margin-left: 10rpx;
-					image{
+
+					image {
 						width: 40rpx;
 						height: 40rpx;
 					}
 				}
 			}
-			
+
 		}
-		.tabbarbox{
+
+		.tabbarbox {
 			@include flexLeft;
 			margin-top: 48rpx;
-			>view{
+
+			>view {
 				font-size: 34rpx;
 				font-weight: 500;
 				color: #000000;
 				margin-right: 3%;
 			}
-			.active{
+
+			.active {
 				color: #006AE3;
 			}
 		}
-		.pledgebox{
+
+		.pledgebox {
 			margin-top: 48rpx;
 			position: relative;
-			&-item{
+
+			&-item {
 				width: 100%;
 				margin-bottom: 40rpx;
-				&-toptt{
+
+				&-toptt {
 					@include flexLeft;
 					font-size: 30rpx;
 					font-weight: bold;
 					color: #000000;
 					display: flex;
-					image{
+
+					image {
 						width: 32rpx;
 						height: 32rpx;
 						border-radius: 50%;
 						margin-left: 8rpx;
 					}
+
+					span {
+						padding-left: 8rpx;
+						font-size: 26rpx;
+						color: #545454
+					}
 				}
-				&-iptbox{
+
+				&-iptbox {
 					@include flexCenter;
 					width: 100%;
 					height: 96rpx;
@@ -552,25 +612,30 @@
 					border-radius: 16rpx;
 					padding: 0 24rpx;
 					margin-top: 20rpx;
-					input{
+
+					input {
 						width: 100%;
 					}
 				}
 			}
-			&-plussign{
+
+			&-plussign {
 				position: absolute;
 				top: 28%;
 				left: 43%;
-				image{
+
+				image {
 					border-radius: 50%;
 					width: 72rpx;
 					height: 72rpx;
 				}
 			}
-			&-Time{
+
+			&-Time {
 				@include flexGrid;
 				margin-top: 24rpx;
-				>view{
+
+				>view {
 					@include flexCenter;
 					width: calc(25% - 10px);
 					height: 72rpx;
@@ -579,12 +644,14 @@
 					font-size: 30rpx;
 					color: #000000;
 				}
-				.active{
+
+				.active {
 					background-color: rgba(0, 106, 227, 0.1);
 					color: #006AE3;
 				}
 			}
-			&-btnbox{
+
+			&-btnbox {
 				@include flexCenter;
 				width: 100%;
 				height: 96rpx;
@@ -596,34 +663,40 @@
 				margin-top: 40rpx;
 			}
 		}
-		.sidebox{
+
+		.sidebox {
 			padding-bottom: 96rpx;
-			
-			&-morebox{
+
+			&-morebox {
 				@include flexCenter;
 				font-size: 26rpx;
 				color: rgba(0, 0, 0, 0.50);
 				margin-top: 40rpx;
 			}
 		}
-		.langbox{
+
+		.langbox {
 			width: 100%;
 			background-color: #FFFFFF;
-			>view{
+
+			>view {
 				@include flexCenter;
 				height: 80rpx;
 				border-bottom: 1px solid #f8f8f8;
-				&:last-child{
+
+				&:last-child {
 					border: none;
 					background-color: #f8f8f8;
 				}
 			}
-			.active{
+
+			.active {
 				color: red;
 			}
 		}
+
 		::-webkit-scrollbar {
-		    width: 0px;
+			width: 0px;
 		}
 	}
 </style>
