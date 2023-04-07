@@ -155,3 +155,68 @@ export function getUserBalance(data) {
 		data
 	})
 }
+
+/**
+ * 获取邀请链接
+ * @param {*} data 
+ */
+export function getUserInvied(data) {
+	return service({
+		url: '/User/getUserInfo',
+		method: 'post',
+		params: {},
+		data
+	})
+}
+
+/**
+ * 获取nft卡牌
+ * @param {*} data 
+ */
+export function nftList(data) {
+	return service({
+		url: '/Goods/goodsList',
+		method: 'post',
+		params: {},
+		data
+	})
+}
+
+/**
+ * 生成nft=》orderid
+ * @param {*} data 
+ */
+export function createnftId(data) {
+	return service({
+		url: '/Goods/buyProduct',
+		method: 'post',
+		params: {},
+		data
+	})
+}
+
+/**
+ * nft购买记录
+ * @param {*} data 
+ */
+export function nftbuyList(data) {
+	return service({
+		url: 'Goods/getAiorder',
+		method: 'post',
+		params: {},
+		data
+	})
+}
+
+/**
+ * 我的团队
+ * @param {*} data 
+ */
+export function myTeamList(data) {
+	return service({
+		url: '/User/myTeam',
+		method: 'post',
+		params: {},
+		data
+	})
+}

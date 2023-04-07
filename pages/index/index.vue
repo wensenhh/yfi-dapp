@@ -13,11 +13,16 @@
 				</view>
 			</view>
 			<view class="topbox">
-				<view class="topbox-title">
-					welcome!
+				<view>
+					<view class="topbox-title">
+						welcome!
+					</view>
+					<view class="topbox-address">
+						{{address | hideaddress(address)}}
+					</view>
 				</view>
-				<view class="topbox-address">
-					{{address | hideaddress(address)}}
+				<view @click="$tools.jump('/pages/myteam/myteam')">
+					我的團隊
 				</view>
 			</view>
 			<view class="noticebox">
@@ -31,9 +36,19 @@
 					<image src="../../static/jiant-you.png" mode=""></image>
 				</view>
 			</view>
+			<!-- 邀请链接 -->
+			<view class="addressbox">
+				<view>
+					邀請鏈接 <span> {{userinvit || '正在获取中~'}}</span>
+				</view>
+				<image src="../../static/copy_icon.png" mode="" @tap="$tools.copy(userinvit)"></image>
+			</view>
 			<view class="tabbarbox">
-				<view class="active">{{$t('index.online') + $t('index.pledge')}}</view>
-				<view>pledge</view>
+				<view>
+					<view class="active">{{$t('index.online') + $t('index.pledge')}}</view>
+					<view>pledge</view>
+				</view>
+				<view class="card" @click="$tools.jump('/pages/transaction/transaction')">NFT卡牌</view>
 			</view>
 			<view class="pledgebox">
 				<view class="pledgebox-item">
@@ -73,14 +88,20 @@
 
 		<view class="sidebox">
 			<view class="tabbarbox">
-				<view class="active">{{$t('index.my') + $t('index.pledge')}}</view>
-				<view>pledge</view>
+				<view>
+					<view class="active">{{$t('index.my') + $t('index.pledge')}}</view>
+					<view>pledge</view>
+				</view>
+				<view></view>
 			</view>
 			<pledgeCard :pledgeList="pledgeList" @getList="getHomePledge"></pledgeCard>
 			<view class="sidebox-morebox" @tap="navgoto('/pages/pledge/pledge')">
 				{{$t('index.clickmore')}} >
 			</view>
 		</view>
+		<!-- <view class="" @click="yanzzz">
+			验证签名
+		</view> -->
 		<uni-popup ref="langpopup" type="bottom">
 			<view class="langbox">
 				<view :class="nowlangcode == item.code ? 'active' : ''" v-for="item in locales"
@@ -105,7 +126,8 @@
 		getEarnings,
 		getRedemption,
 		getCoinPrice,
-		getUserBalance
+		getUserBalance,
+		getUserInvied
 	} from '@/api/api.js';
 	const Web3 = require("@/common/getWeb3");
 	import web3utils from '@/common/web3Utils.js';
@@ -115,6 +137,9 @@
 		yfiabi,
 		tokenabi
 	} from "@/common/yfiabi";
+	import {
+		ethers
+	} from "ethers";
 	export default {
 		components: {
 			uniPopup,
@@ -148,7 +173,8 @@
 					core_num: null,
 					yfi_num: null
 				},
-				pledgeTimeid: null
+				pledgeTimeid: null,
+				userinvit: null
 			}
 		},
 		watch: {
@@ -193,7 +219,7 @@
 				]
 			}
 		},
-		async onLoad() {
+		async onLoad(option) {
 			let systemInfo = uni.getSystemInfoSync();
 			let that = this
 			this.systemLocale = systemInfo.language;
@@ -202,6 +228,10 @@
 			uni.onLocaleChange((e) => {
 				this.nowlangcode = e.locale;
 			})
+			if (option.invit) {
+				this.invit = option.invit
+				uni.setStorageSync('invit', option.invit)
+			}
 			// 获取地址
 			uni.setStorageSync('address', "");
 			uni.setStorageSync('token', '')
@@ -231,6 +261,7 @@
 				this.getHomePledge() //获取首页质押订单
 				this.accountfn() // 监测是否切换钱包
 				this.getBalance() // 获取用户余额
+				this.getUserInvied()// 获取邀请链接
 			},
 			getWeb3fun(callback) {
 				let that = this
@@ -275,13 +306,15 @@
 				}).then(res => {
 					try {
 						let web3 = window.web3
-						let MyContract = web3utils.createContract(yfiabi, pledge, this.address)
+						let provider = new ethers.providers.Web3Provider(window.ethereum);
+						const signer = provider.getSigner();
+						let MyContract = new ethers.Contract(pledge, yfiabi, signer);
 						const corenum = web3.utils.toWei(this.corenum.toString(), "ether")
 						const yfinum = web3.utils.toWei(this.yfinum.toString(), "ether")
-						MyContract.methods.twostake(res.data, corenum, yfinum).send({
-							from: this.address,
+						MyContract.twostake(res.data, corenum, yfinum,{
 							value: corenum
 						}).then(res => {
+							console.log('质押成功=',res)
 							that.$tools.toast(that.$t('index.pledgesuccess'))
 							that.getHomePledge()
 							uni.hideLoading()
@@ -335,6 +368,26 @@
 					}
 				})
 			},
+			async yanzzz() {
+				let that = this
+				return false
+				const signkey = await that.$tools.signMessage('receive award')
+				try {
+					const signres = await this.$tools.verifyMessage({
+						message: 'receive award',
+						address: that.address,
+						signature: signkey
+					})
+					console.log(signres)
+					if (!signres) {
+						return false
+					}
+				} catch (e) {
+					//TODO handle the exception
+					console.log("用户拒绝签名")
+					return false
+				}
+			},
 			getBalance() {
 				getUserBalance().then(res => {
 					let web3 = window.web3
@@ -353,8 +406,10 @@
 			async ApproveYFI() {
 				let that = this;
 				let data = new Object();
-				data['from'] = web3utils.createContract(tokenabi, yfiaddr, that.address);
-				data['to'] = web3utils.createContract(tokenabi, pledge, that.address);
+				let provider = new ethers.providers.Web3Provider(window.ethereum);
+				const signer = provider.getSigner();
+				data['from'] = new ethers.Contract(yfiaddr, tokenabi, signer);
+				data['to'] = new ethers.Contract(pledge, tokenabi, signer);
 				data['account'] = that.address;
 				web3utils.approve(data, function() {
 					that.approveFlag = true;
@@ -370,7 +425,8 @@
 			},
 			getLogin(callback) {
 				Login({
-					account: this.address
+					account: this.address,
+					invit: this.invit || ''
 				}).then(res => {
 					this.$tools.toast(this.$t('index.loginsuccess'))
 					uni.setStorageSync('token', res.data)
@@ -404,17 +460,25 @@
 				// 查询授权额度
 				try {
 					var web3 = window.web3
-					var MyContract = web3utils.createContract(tokenabi, yfiaddr, this.address)
-					MyContract.methods.allowance(this.address, pledge).call().then(
+					let provider = new ethers.providers.Web3Provider(window.ethereum);
+					const signer = provider.getSigner();
+					let MyContract = new ethers.Contract(yfiaddr, tokenabi, signer);
+					// var MyContract = web3utils.createContract(tokenabi, yfiaddr, this.address)
+					MyContract.allowance(this.address, pledge).then(
 						res => {
-							let n = web3.utils.fromWei(res, "ether");
+							let n = Number(ethers.utils.formatEther(res.toString()));
 							console.log("授权数量==", n);
-							this.approveFlag = n >= 100000000;
+							this.approveFlag = n >= 1000000;
 						})
 				} catch (error) {
 					// this.allowanceBalance = 0;
 					console.error("trigger smart contract error", error)
 				}
+			},
+			getUserInvied(){
+				getUserInvied().then(res => {
+					this.userinvit = res.data.shareurl
+				})
 			},
 			openlangpop() {
 				this.$refs.langpopup.open()
@@ -501,17 +565,50 @@
 
 			}
 		}
-
+		.addressbox {
+			@include flexBetween;
+			width: 100%;
+			height: 96rpx;
+			border-radius: 16rpx;
+			border: 1px solid #353535;
+			padding: 24rpx;
+			margin-top: 48rpx;
+		
+			>view {
+				font-size: 22rpx;
+				color: #000000;
+		
+				>span {
+					padding-left: 24rpx;
+				}
+			}
+		
+			image {
+				width: 40rpx;
+				height: 40rpx;
+			}
+		}
 		.topbox {
-			@include flexLeftColumn;
+			@include flexBetween;
 			margin-top: 24rpx;
-
+			>view{
+				@include flexLeftColumn;
+				&:last-child{
+					@include flexCenter;
+					width: 140rpx;
+					height: 50rpx;
+					background: #006AE3;
+					border-radius: 8rpx;
+					color: #FFFFFF;
+					font-size: 26rpx;
+				}
+			}
 			&-title {
 				font-size: 48rpx;
 				font-weight: bolder;
 				color: #006AE3;
 			}
-
+			
 			&-address {
 				font-size: 30rpx;
 				color: #545454;
@@ -560,14 +657,29 @@
 		}
 
 		.tabbarbox {
-			@include flexLeft;
+			@include flexBetween;
 			margin-top: 48rpx;
 
 			>view {
-				font-size: 34rpx;
-				font-weight: 500;
-				color: #000000;
-				margin-right: 3%;
+				display: flex;
+				&:first-child {
+					font-size: 34rpx;
+					font-weight: 500;
+					color: #000000;
+					>view{
+						margin-right: 3%;
+					}
+				}
+			}
+
+			.card {
+				@include flexCenter;
+				width: 140rpx;
+				height: 50rpx;
+				background: #006AE3;
+				border-radius: 8rpx;
+				color: #FFFFFF;
+				font-size: 26rpx;
 			}
 
 			.active {

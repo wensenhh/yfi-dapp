@@ -23,20 +23,29 @@
 			</view>
 			<view class="sidebox-box-threebox">
 				<view class="sidebox-box-threebox-time">{{item.create_time}}</view>
-				<view class="sidebox-box-threebox-btn" @click="getearnings(item.id)" v-if="item.status_name === 1 || (item.status_name === 2 && item.pay_money > 0)">{{$t('index.getqu')}}</view>
-				<view class="sidebox-box-threebox-btn" @click="getredemption(item.id)" v-if="item.status_name === 2 && item.pay_money == 0">{{$t('index.redemption')}}</view>
+				<view class="sidebox-box-threebox-btn" @click="getearnings(item.id)"
+					v-if="item.status_name === 1 || (item.status_name === 2 && item.pay_money > 0)">
+					{{$t('index.getqu')}}</view>
+				<view class="sidebox-box-threebox-btn" @click="getredemption(item.id)"
+					v-if="item.status_name === 2 && item.pay_money == 0">{{$t('index.redemption')}}</view>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
-	import { getEarnings, getRedemption } from '@/api/api.js';
+	import {
+		getEarnings,
+		getRedemption
+	} from '@/api/api.js';
+	import {
+		ethers
+	} from "ethers";
 	export default {
-		name:"pledgeCard",
+		name: "pledgeCard",
 		data() {
 			return {
-				
+
 			};
 		},
 		props: {
@@ -47,13 +56,35 @@
 		},
 		methods: {
 			// 赎回
-			getredemption(id){
+			async getredemption(id) {
 				let that = this;
+				const address = await that.$tools.getAddress()
+				const signkey = await that.$tools.signMessage('receive award')
+				const signres = await that.$tools.verifyMessage({
+					message: 'receive award',
+					address: address,
+					signature: signkey
+				})
+				// try{
+				// 	const signres = await that.$tools.verifyMessage({
+				// 		message: 'receive award',
+				// 		address: address,
+				// 		signature: signkey
+				// 	})
+				// 	console.log(signres)
+				// 	if(!signres){
+				// 		return false
+				// 	}
+				// }catch(e){
+				// 	//TODO handle the exception
+				// 	console.log("用户拒绝签名")
+				// 	return false
+				// }
 				uni.showModal({
 					title: '提示',
 					content: that.$t('index.getredemptionanswers'),
 					success(res) {
-						if(res.confirm){
+						if (res.confirm) {
 							getRedemption({
 								id: id
 							}).then(res => {
@@ -67,13 +98,36 @@
 				})
 			},
 			// 领取收益
-			getearnings(id){
+			async getearnings(id) {
 				let that = this;
+				const address = await that.$tools.getAddress()
+				const signkey = await that.$tools.signMessage('receive award')
+				const signres = await that.$tools.verifyMessage({
+					message: 'receive award',
+					address: address,
+					signature: signkey
+				})
+				// try{
+				// 	const signres = await that.$tools.verifyMessage({
+				// 		message: 'receive award',
+				// 		address: address,
+				// 		signature: signkey
+				// 	})
+				// 	console.log(signres)
+				// 	if(!signres){
+				// 		return false
+				// 	}
+				// }catch(e){
+				// 	//TODO handle the exception
+				// 	console.log("用户拒绝签名")
+				// 	return false
+				// }
+
 				uni.showModal({
 					title: '提示',
 					content: that.$t('index.getpledgeanswers'),
 					success(res) {
-						if(res.confirm){
+						if (res.confirm) {
 							getEarnings({
 								id: id
 							}).then(res => {
@@ -91,7 +145,7 @@
 </script>
 
 <style lang="scss" scoped>
-	.sidebox-box{
+	.sidebox-box {
 		width: 100%;
 		padding: 36rpx 24rpx;
 		border-radius: 16rpx;
@@ -100,30 +154,36 @@
 		flex-direction: row;
 		flex-direction: column;
 		margin-top: 24rpx;
-		&-onebox{
+
+		&-onebox {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			&-left{
+
+			&-left {
 				display: flex;
 				justify-content: inherit;
 				align-items: center;
 				width: 66%;
-				&-title{
+
+				&-title {
 					font-size: 26rpx;
 					color: #000000;
-					span{
+
+					span {
 						font-size: 30rpx;
 						color: #FF2929;
 						margin-right: 6rpx;
 					}
 				}
-				&-icon{
+
+				&-icon {
 					width: 32rpx;
 					height: 32rpx;
 				}
 			}
-			&-right{
+
+			&-right {
 				@include flexCenter;
 				width: 144rpx;
 				height: 64rpx;
@@ -132,40 +192,48 @@
 				color: #0BAC2F;
 			}
 		}
-		&-twobox{
+
+		&-twobox {
 			@include flexGrid;
 			margin-top: 42rpx;
 			align-items: center;
-			>view{
+
+			>view {
 				width: 49%;
 				font-size: 26rpx;
 				color: rgba(0, 0, 0, 0.50);
-				>span{
+
+				>span {
 					font-size: 30rpx;
 					color: #000000;
 					padding-left: 8rpx;
 				}
-				&:last-child{
+
+				&:last-child {
 					@include flexRight;
 				}
 			}
-			&-centerbox{
+
+			&-centerbox {
 				width: 1rpx !important;
 				height: 40rpx;
 				background-color: rgba(0, 0, 0, 0.10);
 				transform: scaleX(0.5)
 			}
 		}
-		&-threebox{
+
+		&-threebox {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
 			margin-top: 48rpx;
-			&-time{
+
+			&-time {
 				font-size: 30rpx;
 				color: rgba(0, 0, 0, 0.50);
 			}
-			&-btn{
+
+			&-btn {
 				@include flexCenter;
 				width: 128rpx;
 				height: 64rpx;

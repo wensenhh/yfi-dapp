@@ -2,8 +2,45 @@ var tp = require('tp-js-sdk')
 const {
 	ethereum
 } = window;
-
+import { ethers } from "ethers";
+const chain_name = 'bsc';
+const chain_id = 56;
 const tools = {};
+
+
+tools.isWalletInstalled = () => {
+  if (!window.ethereum) {
+    throw new Error("No crypto wallet found. Please install it.");
+  } else {
+    return true;
+  }
+};
+
+tools.signMessage = async (message) => {
+	const provider = await new ethers.providers.Web3Provider(window.ethereum)
+	const signer = await provider.getSigner();
+	const address = tools.getAddress();
+	const result = await signer.signMessage(message);
+	return result;
+};
+
+tools.verifyMessage = async ({
+	message,
+	address,
+	signature
+}) => {
+	try {
+		console.log(ethers)
+		const signerAddr = await ethers.utils.verifyMessage(message, signature);
+		if (signerAddr.toLowerCase() !== address) {
+			return false;
+		}
+		return true;
+	} catch (err) {
+		console.log(err);
+		return false;
+	}
+}
 
 tools.getAddress = async () => {
 	let isTpWallet = tp.isConnected();

@@ -12,7 +12,9 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "%index.pledgerecord%",
-                "enablePullDownRefresh": false
+                "enablePullDownRefresh": false,
+				"onReachBottomDistance": 150,
+				"enablePullDownRefresh": true
             }
             
         }
@@ -31,6 +33,35 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "%index.noticeDetail%",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/transaction/transaction",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/transaction/detail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/myteam/myteam",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "我的团队",
                 "enablePullDownRefresh": false
             }
             

@@ -6,8 +6,11 @@
 		</view>
 		<view class="sidebox">
 			<pledgeCard :pledgeList="pledgeList" @getList="getPledgeList"></pledgeCard>
-			<view class="sidebox-morebox" v-if="pledgeList.length === 0">
+			<view class="sidebox-morebox" v-if="!!isloading">
 				{{$t('index.nomoredata')}}
+			</view>
+			<view class="sidebox-morebox" v-else>
+				數據加載中...
 			</view>
 		</view>
 	</view>
@@ -15,7 +18,11 @@
 
 <script>
 	import pledgeCard from '@/components/pledgeCard/pledgeCard.vue';
-	import { getPledgeList, getEarnings, getRedemption } from '@/api/api.js';
+	import {
+		getPledgeList,
+		getEarnings,
+		getRedemption
+	} from '@/api/api.js';
 	export default {
 		components: {
 			pledgeCard
@@ -23,29 +30,65 @@
 		data() {
 			return {
 				navbarindex: 2,
-				pledgeList: []
+				pledgeList: [],
+				queryObj: {
+					pagenum: 1,
+					pagesize: 10
+				},
+				isloading: false,
+				total: 0
 			};
 		},
 		onLoad() {
 			this.getPledgeList()
 		},
+		// 触底的事件
+		onReachBottom() {
+			if (this.queryObj.pagenum * this.queryObj.pagesize >= this.total){
+				this.isloading = true
+				return this.$tools.toast('數據加載完畢!')
+			} 
+
+			if (this.isloading) return
+
+			// 让页码值自增+1
+			this.queryObj.pagenum++
+			this.getPledgeList()
+		},
+		// 下拉刷新的事件
+		onPullDownRefresh() {
+		  // 1. 重置关键数据
+		  this.queryObj.pagenum = 1
+		  this.total = 0
+		  this.isloading = false
+		  this.pledgeList = []
+		 
+		  // 2. 重新发起请求
+		  this.getPledgeList(() => uni.stopPullDownRefresh())
+		},
 		methods: {
-			getPledgeList(){
+			getPledgeList(cb) {
 				getPledgeList({
-					status: this.navbarindex
+					status: this.navbarindex,
+					page: this.queryObj.pagenum,
+					limit: this.queryObj.pagesize,
 				}).then(res => {
+					this.isloading = false
 					let list = res.data.list
-					this.pledgeList = list
+					cb && cb()
+					// this.pledgeList = list
+					this.pledgeList = [...this.pledgeList, ...list]
+					this.total = res.data.total
 				})
 			},
 			// 赎回
-			getredemption(id){
+			getredemption(id) {
 				let that = this;
 				uni.showModal({
 					title: '提示',
 					content: that.$t('index.getredemptionanswers'),
 					success(res) {
-						if(res.confirm){
+						if (res.confirm) {
 							getRedemption({
 								id: id
 							}).then(res => {
@@ -59,13 +102,13 @@
 				})
 			},
 			// 领取收益
-			getearnings(id){
+			getearnings(id) {
 				let that = this;
 				uni.showModal({
 					title: '提示',
 					content: that.$t('index.getpledgeanswers'),
 					success(res) {
-						if(res.confirm){
+						if (res.confirm) {
 							getEarnings({
 								id: id
 							}).then(res => {
@@ -78,8 +121,13 @@
 					}
 				})
 			},
-			changetab(i){
+			changetab(i) {
 				this.navbarindex = i
+				// 1. 重置关键数据
+				this.queryObj.pagenum = 1
+				this.total = 0
+				this.isloading = false
+				this.pledgeList = []
 				this.getPledgeList()
 			},
 		}
@@ -87,17 +135,20 @@
 </script>
 
 <style lang="scss">
-	.container{
+	.container {
 		background-color: #F8F8F8;
-		>view{
+
+		>view {
 			padding: 0 32rpx;
 		}
-		.topbar{
+
+		.topbar {
 			padding: 24rpx 0;
 			background-color: #ffffff;
 			display: flex;
 			width: 100%;
-			>view{
+
+			>view {
 				@include flexCenter;
 				background-color: #F9F9F9;
 				font-size: 30rpx;
@@ -107,15 +158,18 @@
 				height: 80rpx;
 				border-radius: 16rpx;
 			}
-			.active{
+
+			.active {
 				background-color: #006AE3;
 				color: #ffffff;
 			}
 		}
-		.sidebox{
+
+		.sidebox {
 			padding-bottom: 96rpx;
 			min-height: 100vh;
-			&-morebox{
+
+			&-morebox {
 				@include flexCenter;
 				font-size: 26rpx;
 				color: rgba(0, 0, 0, 0.50);

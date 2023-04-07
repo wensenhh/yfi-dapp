@@ -73,6 +73,7 @@
         "title" : "YFI",
         "router" : {
             "base" : "/h5/"
-        }
+        },
+        "template" : ""
     }
 }

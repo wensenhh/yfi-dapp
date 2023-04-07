@@ -5,16 +5,15 @@
  */
 export const yfiaddr = '0x9c765C62ad538011c2aAd815CaAeEc94551fbE9D'
 export const pledge = '0x3E7fe399DfeDA3e8f462552511030C445c40552f'
-export const yfiabi = [
-	{
+export const nftaddr = '0x9C55ce920A230d0245554EaA02962F1B39dF9A0B'
+export const yfiabi = [{
 		"inputs": [],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
 	},
 	{
 		"anonymous": false,
-		"inputs": [
-			{
+		"inputs": [{
 				"indexed": false,
 				"internalType": "address",
 				"name": "user",
@@ -32,8 +31,7 @@ export const yfiabi = [
 	},
 	{
 		"anonymous": false,
-		"inputs": [
-			{
+		"inputs": [{
 				"indexed": false,
 				"internalType": "address",
 				"name": "user",
@@ -63,8 +61,7 @@ export const yfiabi = [
 	},
 	{
 		"anonymous": false,
-		"inputs": [
-			{
+		"inputs": [{
 				"indexed": false,
 				"internalType": "address",
 				"name": "user",
@@ -88,8 +85,7 @@ export const yfiabi = [
 	},
 	{
 		"anonymous": false,
-		"inputs": [
-			{
+		"inputs": [{
 				"indexed": false,
 				"internalType": "address",
 				"name": "user",
@@ -119,8 +115,7 @@ export const yfiabi = [
 	},
 	{
 		"anonymous": false,
-		"inputs": [
-			{
+		"inputs": [{
 				"indexed": false,
 				"internalType": "address",
 				"name": "user",
@@ -151,50 +146,42 @@ export const yfiabi = [
 	{
 		"inputs": [],
 		"name": "addressu",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
+		"outputs": [{
+			"internalType": "address",
+			"name": "",
+			"type": "address"
+		}],
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_minter",
-				"type": "address"
-			}
-		],
+		"inputs": [{
+			"internalType": "address",
+			"name": "_minter",
+			"type": "address"
+		}],
 		"name": "addsomeusmwd",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_n",
-				"type": "uint256"
-			}
-		],
+		"inputs": [{
+			"internalType": "uint256",
+			"name": "_n",
+			"type": "uint256"
+		}],
 		"name": "chDindexmax",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "bool",
-				"name": "ci",
-				"type": "bool"
-			}
-		],
+		"inputs": [{
+			"internalType": "bool",
+			"name": "ci",
+			"type": "bool"
+		}],
 		"name": "cisp2",
 		"outputs": [],
 		"stateMutability": "nonpayable",
@@ -203,24 +190,20 @@ export const yfiabi = [
 	{
 		"inputs": [],
 		"name": "count",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
+		"outputs": [{
+			"internalType": "uint256",
+			"name": "",
+			"type": "uint256"
+		}],
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address payable",
-				"name": "amount",
-				"type": "address"
-			}
-		],
+		"inputs": [{
+			"internalType": "address payable",
+			"name": "amount",
+			"type": "address"
+		}],
 		"name": "cru5",
 		"outputs": [],
 		"stateMutability": "nonpayable",
@@ -229,59 +212,48 @@ export const yfiabi = [
 	{
 		"inputs": [],
 		"name": "ec",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
+		"outputs": [{
+			"internalType": "address",
+			"name": "",
+			"type": "address"
+		}],
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "amount",
-				"type": "address"
-			}
-		],
+		"inputs": [{
+			"internalType": "address",
+			"name": "amount",
+			"type": "address"
+		}],
 		"name": "eru6",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "id",
-				"type": "uint256"
-			}
-		],
+		"inputs": [{
+			"internalType": "uint256",
+			"name": "id",
+			"type": "uint256"
+		}],
 		"name": "getStakeidAdress",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
+		"outputs": [{
+			"internalType": "address",
+			"name": "",
+			"type": "address"
+		}],
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "orderid",
-				"type": "uint256"
-			}
-		],
+		"inputs": [{
+			"internalType": "uint256",
+			"name": "orderid",
+			"type": "uint256"
+		}],
 		"name": "getuserinfoFromorder",
-		"outputs": [
-			{
+		"outputs": [{
 				"internalType": "address",
 				"name": "user",
 				"type": "address"
@@ -303,37 +275,31 @@ export const yfiabi = [
 	{
 		"inputs": [],
 		"name": "indexmax",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
+		"outputs": [{
+			"internalType": "uint256",
+			"name": "",
+			"type": "uint256"
+		}],
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
 		"inputs": [],
 		"name": "isp",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
+		"outputs": [{
+			"internalType": "bool",
+			"name": "",
+			"type": "bool"
+		}],
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "t",
-				"type": "address"
-			}
-		],
+		"inputs": [{
+			"internalType": "address",
+			"name": "t",
+			"type": "address"
+		}],
 		"name": "issetuyfi",
 		"outputs": [],
 		"stateMutability": "nonpayable",
@@ -342,46 +308,39 @@ export const yfiabi = [
 	{
 		"inputs": [],
 		"name": "nft",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
+		"outputs": [{
+			"internalType": "address",
+			"name": "",
+			"type": "address"
+		}],
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
 		"inputs": [],
 		"name": "oneday",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
+		"outputs": [{
+			"internalType": "uint256",
+			"name": "",
+			"type": "uint256"
+		}],
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
 		"inputs": [],
 		"name": "price",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
+		"outputs": [{
+			"internalType": "uint256",
+			"name": "",
+			"type": "uint256"
+		}],
 		"stateMutability": "view",
 		"type": "function"
 	},
 
 	{
-		"inputs": [
-			{
+		"inputs": [{
 				"internalType": "uint256",
 				"name": "amount",
 				"type": "uint256"
@@ -403,8 +362,7 @@ export const yfiabi = [
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
+		"inputs": [{
 				"internalType": "uint256",
 				"name": "amount",
 				"type": "uint256"
@@ -426,8 +384,7 @@ export const yfiabi = [
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
+		"inputs": [{
 				"internalType": "uint256",
 				"name": "t",
 				"type": "uint256"
@@ -444,8 +401,7 @@ export const yfiabi = [
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
+		"inputs": [{
 				"internalType": "uint256",
 				"name": "t",
 				"type": "uint256"
@@ -462,8 +418,7 @@ export const yfiabi = [
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
+		"inputs": [{
 				"internalType": "uint256",
 				"name": "t",
 				"type": "uint256"
@@ -480,8 +435,7 @@ export const yfiabi = [
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
+		"inputs": [{
 				"internalType": "uint256",
 				"name": "orderid",
 				"type": "uint256"
@@ -508,54 +462,43 @@ export const yfiabi = [
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
+		"inputs": [{
+			"internalType": "uint256",
+			"name": "",
+			"type": "uint256"
+		}],
 		"name": "stakeallnum",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
+		"outputs": [{
+			"internalType": "uint256",
+			"name": "",
+			"type": "uint256"
+		}],
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
+		"inputs": [{
+			"internalType": "uint256",
+			"name": "",
+			"type": "uint256"
+		}],
 		"name": "stakeidaddress",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
+		"outputs": [{
+			"internalType": "address",
+			"name": "",
+			"type": "address"
+		}],
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
+		"inputs": [{
+			"internalType": "uint256",
+			"name": "",
+			"type": "uint256"
+		}],
 		"name": "stakorders",
-		"outputs": [
-			{
+		"outputs": [{
 				"internalType": "uint256",
 				"name": "yfiamount",
 				"type": "uint256"
@@ -585,46 +528,37 @@ export const yfiabi = [
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
+		"inputs": [{
+			"internalType": "uint256",
+			"name": "",
+			"type": "uint256"
+		}],
 		"name": "tokenlvt",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
+		"outputs": [{
+			"internalType": "address",
+			"name": "",
+			"type": "address"
+		}],
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
+		"inputs": [{
+			"internalType": "uint256",
+			"name": "",
+			"type": "uint256"
+		}],
 		"name": "tokenlvtprice",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
+		"outputs": [{
+			"internalType": "uint256",
+			"name": "",
+			"type": "uint256"
+		}],
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
+		"inputs": [{
 				"internalType": "uint256",
 				"name": "amount",
 				"type": "uint256"
@@ -641,8 +575,7 @@ export const yfiabi = [
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
+		"inputs": [{
 				"internalType": "uint256",
 				"name": "orderid",
 				"type": "uint256"
@@ -664,13 +597,11 @@ export const yfiabi = [
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "orderid",
-				"type": "uint256"
-			}
-		],
+		"inputs": [{
+			"internalType": "uint256",
+			"name": "orderid",
+			"type": "uint256"
+		}],
 		"name": "unstake",
 		"outputs": [],
 		"stateMutability": "nonpayable",
@@ -679,27 +610,22 @@ export const yfiabi = [
 	{
 		"inputs": [],
 		"name": "usdt",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
+		"outputs": [{
+			"internalType": "address",
+			"name": "",
+			"type": "address"
+		}],
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
+		"inputs": [{
+			"internalType": "address",
+			"name": "",
+			"type": "address"
+		}],
 		"name": "userInfos",
-		"outputs": [
-			{
+		"outputs": [{
 				"internalType": "uint256",
 				"name": "yfiamountall",
 				"type": "uint256"
@@ -721,45 +647,37 @@ export const yfiabi = [
 	{
 		"inputs": [],
 		"name": "weekdays",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
+		"outputs": [{
+			"internalType": "uint256",
+			"name": "",
+			"type": "uint256"
+		}],
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
+		"inputs": [{
+			"internalType": "address",
+			"name": "",
+			"type": "address"
+		}],
 		"name": "whiteaddress",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
+		"outputs": [{
+			"internalType": "bool",
+			"name": "",
+			"type": "bool"
+		}],
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
 		"inputs": [],
 		"name": "yfi",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
+		"outputs": [{
+			"internalType": "address",
+			"name": "",
+			"type": "address"
+		}],
 		"stateMutability": "view",
 		"type": "function"
 	},
@@ -768,7 +686,183 @@ export const yfiabi = [
 		"type": "receive"
 	}
 ]
-
+export const nftabi = [{
+	"inputs": [{
+		"indexed": true,
+		"name": "currency",
+		"internalType": "address",
+		"type": "address"
+	}, {
+		"indexed": true,
+		"name": "_user",
+		"internalType": "address",
+		"type": "address"
+	}, {
+		"indexed": false,
+		"name": "_value",
+		"internalType": "uint256",
+		"type": "uint256"
+	}, {
+		"indexed": false,
+		"name": "orderId",
+		"internalType": "string",
+		"type": "string"
+	}],
+	"name": "Claim",
+	"anonymous": false,
+	"type": "event"
+}, {
+	"inputs": [{
+		"indexed": true,
+		"name": "_user",
+		"internalType": "address",
+		"type": "address"
+	}, {
+		"indexed": false,
+		"name": "_value",
+		"internalType": "uint256",
+		"type": "uint256"
+	}],
+	"name": "ClaimAll",
+	"anonymous": false,
+	"type": "event"
+}, {
+	"inputs": [{
+		"indexed": true,
+		"name": "previousOwner",
+		"internalType": "address",
+		"type": "address"
+	}, {
+		"indexed": true,
+		"name": "newOwner",
+		"internalType": "address",
+		"type": "address"
+	}],
+	"name": "OwnershipTransferred",
+	"anonymous": false,
+	"type": "event"
+}, {
+	"inputs": [{
+		"indexed": true,
+		"name": "_user",
+		"internalType": "address",
+		"type": "address"
+	}, {
+		"indexed": false,
+		"name": "_orderId",
+		"internalType": "uint256",
+		"type": "uint256"
+	}, {
+		"indexed": false,
+		"name": "_value",
+		"internalType": "uint256",
+		"type": "uint256"
+	}],
+	"name": "Recharge",
+	"anonymous": false,
+	"type": "event"
+}, {
+	"outputs": [],
+	"inputs": [{
+		"name": "orderId",
+		"internalType": "string",
+		"type": "string"
+	}, {
+		"name": "toAddress",
+		"internalType": "address",
+		"type": "address"
+	}, {
+		"name": "currency",
+		"internalType": "address",
+		"type": "address"
+	}, {
+		"name": "_amount",
+		"internalType": "uint256",
+		"type": "uint256"
+	}],
+	"name": "claim",
+	"stateMutability": "nonpayable",
+	"type": "function"
+}, {
+	"outputs": [],
+	"inputs": [{
+		"name": "currency",
+		"internalType": "address",
+		"type": "address"
+	}],
+	"name": "claimAll",
+	"stateMutability": "nonpayable",
+	"type": "function"
+}, {
+	"outputs": [{
+		"name": "",
+		"internalType": "bool",
+		"type": "bool"
+	}],
+	"inputs": [{
+		"name": "orderid",
+		"internalType": "string",
+		"type": "string"
+	}],
+	"name": "getOrderId",
+	"stateMutability": "view",
+	"type": "function"
+}, {
+	"outputs": [{
+		"name": "",
+		"internalType": "address",
+		"type": "address"
+	}],
+	"inputs": [],
+	"name": "owner",
+	"stateMutability": "view",
+	"type": "function"
+}, {
+	"outputs": [],
+	"inputs": [{
+		"name": "orderId",
+		"internalType": "uint256",
+		"type": "uint256"
+	}],
+	"name": "recharge",
+	"stateMutability": "payable",
+	"type": "function"
+}, {
+	"outputs": [],
+	"inputs": [],
+	"name": "renounceOwnership",
+	"stateMutability": "nonpayable",
+	"type": "function"
+}, {
+	"outputs": [],
+	"inputs": [{
+		"name": "addr",
+		"internalType": "address",
+		"type": "address"
+	}],
+	"name": "setAcceptAddress",
+	"stateMutability": "nonpayable",
+	"type": "function"
+}, {
+	"outputs": [],
+	"inputs": [{
+		"name": "newOwner",
+		"internalType": "address",
+		"type": "address"
+	}],
+	"name": "transferOwnership",
+	"stateMutability": "nonpayable",
+	"type": "function"
+}, {
+	"outputs": [],
+	"inputs": [],
+	"name": "withdraw",
+	"stateMutability": "payable",
+	"type": "function"
+}, {
+	"stateMutability": "payable",
+	"type": "receive"
+}]
 export const tokenabi = [{
 		"inputs": [],
 		"payable": false,
