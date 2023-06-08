@@ -46,6 +46,7 @@ service.interceptors.response.use(res => {
 			uni.setStorageSync('token', res.data)
 		})
 	} else {
+		$tools.toast(res.data.msg)
 		return Promise.reject(res.data.msg);
 	}
 }, error => {

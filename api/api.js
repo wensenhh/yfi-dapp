@@ -220,3 +220,55 @@ export function myTeamList(data) {
 		data
 	})
 }
+
+/**
+ * 可转账数量
+ * @param {*} data 
+ */
+export function getAiordernumber(data) {
+	return service({
+		url: '/Goods/getAiordernumber',
+		method: 'post',
+		params: {},
+		data
+	})
+}
+
+/**
+ * 兑换卡牌
+ * @param {*} data 
+ */
+export function conversionnft(data) {
+	return service({
+		url: '/Goods/aiorderToVip',
+		method: 'post',
+		params: {},
+		data
+	})
+}
+
+/**
+ * 兑换记录
+ * @param {*} data 
+ */
+export function getconverinfo(data) {
+	return service({
+		url: '/Goods/aiViporderList',
+		method: 'post',
+		params: {},
+		data
+	})
+}
+
+/**
+ * nft订单兑换
+ * @param {*} data 
+ */
+export function getnfttoearing(data) {
+	return service({
+		url: '/Goods/aiorderExchange',
+		method: 'post',
+		params: {},
+		data
+	})
+}

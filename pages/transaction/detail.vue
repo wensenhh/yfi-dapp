@@ -8,8 +8,9 @@
 				<view class="initHeader-box-center">
 					購買記錄
 				</view>
-				<view class="initHeader-box-right" @click="$tools.noOpen()">一鍵領取
-					<!-- <view class="" style="width: 40upx;"></view> -->
+				<!-- 一鍵領取 -->
+				<view class="initHeader-box-right" @click="$tools.noOpen()">
+					<view class="" style="width: 40upx;"></view>
 				</view>
 			</view>
 		</view>
@@ -22,7 +23,7 @@
 						:src="'../../static/nft' + item.goodsid + '.mp4'"></video>
 					<view class="flex-row justify-between items-center group_4">
 						<text class="font_1 text_4">X{{item.number}}</text>
-						<view class="flex-col justify-start items-center text-wrapper" @click="$tools.noOpen()"><text class="font_2">領取</text>
+						<view class="flex-col justify-start items-center text-wrapper" @click="getearing(item.id)"><text class="font_2">領取</text>
 						</view>
 					</view>
 				</view>
@@ -36,7 +37,8 @@
 
 <script>
 	import {
-		nftbuyList
+		nftbuyList,
+		getnfttoearing
 	} from '@/api/api.js';
 	const Web3 = require("@/common/getWeb3");
 	import web3utils from '@/common/web3Utils.js';
@@ -50,6 +52,25 @@
 			this.getbugnftList()
 		},
 		methods: {
+			getearing(id){
+				let that = this;
+				uni.showModal({
+					title: '提示',
+					content: that.$t('index.getpledgeanswers'),
+					success(res) {
+						if (res.confirm) {
+							getnfttoearing({
+								id: id
+							}).then(res => {
+								that.$tools.toast(that.$t('index.earningsSuccess'))
+								that.getbugnftList()
+							}).catch(err => {
+								that.$tools.toast(err)
+							})
+						}
+					}
+				})
+			},
 			getbugnftList() {
 				nftbuyList().then(res => {
 					this.mybuyList = res.data.list

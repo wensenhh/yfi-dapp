@@ -3,10 +3,10 @@
 		<view class="sidebox-box" v-for="(item,i) in pledgeList" :key="i">
 			<view class="sidebox-box-onebox">
 				<view class="sidebox-box-onebox-left">
-					<view class="sidebox-box-onebox-left-title"><span>{{item.core_num}}</span>CORE</view>
+					<!-- <view class="sidebox-box-onebox-left-title"><span>{{item.core_num}}</span>CORE</view>
 					<view class="sidebox-box-onebox-left-icon">
 						<image src="../../static/jiahao.png" mode=""></image>
-					</view>
+					</view> -->
 					<view class="sidebox-box-onebox-left-title"><span>{{item.yfi_num}}</span>YFI</view>
 				</view>
 				<view class="sidebox-box-onebox-right">{{item.status}}</view><!-- {{$t('index.going')}} -->
@@ -18,8 +18,11 @@
 			</view>
 			<view class="sidebox-box-twobox">
 				<view>{{$t('index.pledgeremainingday')}}<span>{{item.day}}</span></view>
-				<view class="sidebox-box-twobox-centerbox"></view>
-				<view>{{$t('index.yield')}}<span>{{item.buy_price}}%</span></view>
+				<view class="">
+					
+				</view>
+				<!-- <view class="sidebox-box-twobox-centerbox"></view>
+				<view>{{$t('index.yield')}}<span>{{item.buy_price}}%</span></view> -->
 			</view>
 			<view class="sidebox-box-threebox">
 				<view class="sidebox-box-threebox-time">{{item.create_time}}</view>
@@ -237,7 +240,7 @@
 				@include flexCenter;
 				width: 128rpx;
 				height: 64rpx;
-				background-color: #006AE3;
+				background-image: linear-gradient(90deg, #0031e3 0%, #d000e3 100%);
 				border-radius: 8rpx;
 				color: #FFFFFF;
 				font-size: 30rpx;

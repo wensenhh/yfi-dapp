@@ -1,15 +1,8 @@
-# hello-i18n
+# YFI
 
-# en
+一款双币质押的DAPP
 
-A demo project for uni-app globalization
+功能：质押分红、NFT、CORE链授权、签名、充值、提现、英文繁体
 
-This template include uni-framework, manifest.json, pages.json, tabbar, Page, Component, API
-
-
-# zh-hans
-
-uni-app 国际化演示
-
-包含 uni-framework、manifest.json、pages.json、tabbar、页面、组件、API
+技术：uniapp+ethersJS
 

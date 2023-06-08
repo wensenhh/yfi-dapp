@@ -21,9 +21,9 @@
 						{{address | hideaddress(address)}}
 					</view>
 				</view>
-				<view @click="$tools.jump('/pages/myteam/myteam')">
+				<!-- <view @click="$tools.jump('/pages/myteam/myteam')">
 					我的團隊
-				</view>
+				</view> -->
 			</view>
 			<view class="noticebox">
 				<view>
@@ -43,15 +43,40 @@
 				</view>
 				<image src="../../static/copy_icon.png" mode="" @tap="$tools.copy(userinvit)"></image>
 			</view>
+			<view class="flex-row equal-division space-x-12">
+			  <image
+			    class="equal-division-item"
+				@click="$tools.jump('/pages/myteam/myteam')"
+			    src="https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/641bf7ba5a7e3f031045ebb8/64255cc099e5b100119d3490/16812014057483482265.png"
+			  />
+			  <image
+			    class="equal-division-item"
+				 @click="$tools.jump('/pages/transaction/transaction')"
+			    src="https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/641bf7ba5a7e3f031045ebb8/64255cc099e5b100119d3490/16817999040300073521.png"
+			  />
+			</view>
+			<view class="flex-row equal-division space-x-12">
+			  <image
+			    class="equal-division-item"
+				@click="$tools.noOpen()"
+			    src="https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/641bf7ba5a7e3f031045ebb8/64255cc099e5b100119d3490/16817999040359081099.png"
+			  />
+			  <!-- $tools.jump('/pages/interstation/conversion') -->
+			  <image
+			    class="equal-division-item"
+				 @click="$tools.jump('/pages/interstation/conversion')"
+			    src="https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/641bf7ba5a7e3f031045ebb8/64255cc099e5b100119d3490/16817999040402669958.png"
+			  />
+			</view>
 			<view class="tabbarbox">
 				<view>
 					<view class="active">{{$t('index.online') + $t('index.pledge')}}</view>
 					<view>pledge</view>
 				</view>
-				<view class="card" @click="$tools.jump('/pages/transaction/transaction')">NFT卡牌</view>
+				<!-- <view class="card" @click="$tools.jump('/pages/transaction/transaction')">NFT卡牌</view> -->
 			</view>
 			<view class="pledgebox">
-				<view class="pledgebox-item">
+				<!-- <view class="pledgebox-item">
 					<view class="pledgebox-item-toptt">
 						CORE<image src="../../static/core.png" mode=""></image>
 						<span>余额：{{userbalance.core_num || '正在获取中~'}}</span>
@@ -59,7 +84,7 @@
 					<view class="pledgebox-item-iptbox">
 						<input type="number" v-model="corenum" :placeholder="$t('index.placeholder')">
 					</view>
-				</view>
+				</view> -->
 				<view class="pledgebox-item">
 					<view class="pledgebox-item-toptt">
 						YFI<image src="../../static/YFI.png" mode=""></image>
@@ -69,9 +94,9 @@
 						<input type="number" v-model="yfinum" :placeholder="$t('index.placeholder')">
 					</view>
 				</view>
-				<view class="pledgebox-plussign">
+				<!-- <view class="pledgebox-plussign">
 					<image src="../../static/jiahao.png" mode=""></image>
-				</view>
+				</view> -->
 				<view class="pledgebox-Time">
 					<view :class="item.actived ? 'active' : ''" v-for="(item,i) in pledgeTime" @tap="changeTime(i)">
 						{{item.name}} {{$t('index.day')}}
@@ -178,29 +203,29 @@
 			}
 		},
 		watch: {
-			corenum(newval, oldval) {
-				if (!this.userPrice.core || !this.userPrice.yfi) {
-					return this.$tools.toast('未获取到价格，请等待一会后重试~')
-				}
-				if (!Number.isInteger(Number(newval))) {
-					// return this.$tools.toast('请输入正整数~')
-				} else {
-					console.log('计算yfi数量=', this.$tools.accDiv(this.$tools.accMul(newval, this.userPrice.core), this
-						.userPrice.yfi))
-					this.yfinum = this.$tools.accDiv(this.$tools.accMul(newval, this.userPrice.core), this.userPrice.yfi)
-						.toFixed(4)
-				}
-			},
-			yfinum(newval, oldval) {
-				if (!Number.isInteger(Number(newval))) {
-					// return this.$tools.toast('请输入正整数~')
-				} else {
-					console.log('计算core数量=', this.$tools.accDiv(this.$tools.accMul(newval, this.userPrice.yfi), this
-						.userPrice.core))
-					this.corenum = this.$tools.accDiv(this.$tools.accMul(newval, this.userPrice.yfi), this.userPrice.core)
-						.toFixed(4)
-				}
-			},
+			// corenum(newval, oldval) {
+			// 	if (!this.userPrice.core || !this.userPrice.yfi) {
+			// 		return this.$tools.toast('未获取到价格，请等待一会后重试~')
+			// 	}
+			// 	if (!Number.isInteger(Number(newval))) {
+			// 		// return this.$tools.toast('请输入正整数~')
+			// 	} else {
+			// 		console.log('计算yfi数量=', this.$tools.accDiv(this.$tools.accMul(newval, this.userPrice.core), this
+			// 			.userPrice.yfi))
+			// 		this.yfinum = this.$tools.accDiv(this.$tools.accMul(newval, this.userPrice.core), this.userPrice.yfi)
+			// 			.toFixed(4)
+			// 	}
+			// },
+			// yfinum(newval, oldval) {
+			// 	if (!Number.isInteger(Number(newval))) {
+			// 		// return this.$tools.toast('请输入正整数~')
+			// 	} else {
+			// 		console.log('计算core数量=', this.$tools.accDiv(this.$tools.accMul(newval, this.userPrice.yfi), this
+			// 			.userPrice.core))
+			// 		this.corenum = this.$tools.accDiv(this.$tools.accMul(newval, this.userPrice.yfi), this.userPrice.core)
+			// 			.toFixed(4)
+			// 	}
+			// },
 		},
 		computed: {
 			locales() {
@@ -284,14 +309,13 @@
 			},
 			// 质押
 			async pledgefun() {
-				if (!this.corenum || !this.yfinum || this.corenum <= 0) {
+				if (!this.yfinum || this.yfinum <= 0) {
 					return this.$tools.toast(this.$t('index.ipttokennum'))
 				}
-				if (Number(this.corenum) < 1) {
-					return this.$tools.toast('必须质押1CORE币以上~')
+				if (Number(this.yfinum) < 0.1) {
+					return this.$tools.toast('必须质押0.1YFI币以上~')
 				}
-				if (Number(this.corenum) > Number(this.userbalance.core_num).toFixed(4) || Number(this.yfinum) >
-					Number(this.userbalance.yfi_num).toFixed(4)) {
+				if (Number(this.yfinum) > Number(this.userbalance.yfi_num).toFixed(4)) {
 					return this.$tools.toast('余额不足~')
 				}
 				uni.showLoading({
@@ -301,7 +325,6 @@
 				let that = this
 				await getPledgeId({
 					id: this.pledgeTimeid,
-					c_number: this.corenum,
 					y_number: this.yfinum
 				}).then(res => {
 					try {
@@ -309,14 +332,13 @@
 						let provider = new ethers.providers.Web3Provider(window.ethereum);
 						const signer = provider.getSigner();
 						let MyContract = new ethers.Contract(pledge, yfiabi, signer);
-						const corenum = web3.utils.toWei(this.corenum.toString(), "ether")
+						// const corenum = web3.utils.toWei(this.corenum.toString(), "ether")
 						const yfinum = web3.utils.toWei(this.yfinum.toString(), "ether")
-						MyContract.twostake(res.data, corenum, yfinum,{
-							value: corenum
-						}).then(res => {
+						MyContract.twostake(res.data, yfinum).then(res => {
 							console.log('质押成功=',res)
 							that.$tools.toast(that.$t('index.pledgesuccess'))
 							that.getHomePledge()
+							that.getBalance()
 							uni.hideLoading()
 						}).catch(err => {
 							console.error("用户取消质押", err)
@@ -468,7 +490,7 @@
 						res => {
 							let n = Number(ethers.utils.formatEther(res.toString()));
 							console.log("授权数量==", n);
-							this.approveFlag = n >= 1000000;
+							this.approveFlag = n >= 1;
 						})
 				} catch (error) {
 					// this.allowanceBalance = 0;
@@ -570,13 +592,13 @@
 			width: 100%;
 			height: 96rpx;
 			border-radius: 16rpx;
-			border: 1px solid #353535;
+			// border: 1px solid #353535;
 			padding: 24rpx;
 			margin-top: 48rpx;
-		
+			background: linear-gradient(90deg, #006AE3 0%, #D479FF 100%);
 			>view {
 				font-size: 22rpx;
-				color: #000000;
+				color: #ffffff;
 		
 				>span {
 					padding-left: 24rpx;
@@ -593,15 +615,15 @@
 			margin-top: 24rpx;
 			>view{
 				@include flexLeftColumn;
-				&:last-child{
-					@include flexCenter;
-					width: 140rpx;
-					height: 50rpx;
-					background: #006AE3;
-					border-radius: 8rpx;
-					color: #FFFFFF;
-					font-size: 26rpx;
-				}
+				// &:last-child{
+				// 	@include flexCenter;
+				// 	width: 140rpx;
+				// 	height: 50rpx;
+				// 	background: #006AE3;
+				// 	border-radius: 8rpx;
+				// 	color: #FFFFFF;
+				// 	font-size: 26rpx;
+				// }
 			}
 			&-title {
 				font-size: 48rpx;
@@ -664,7 +686,7 @@
 				display: flex;
 				&:first-child {
 					font-size: 34rpx;
-					font-weight: 500;
+					font-weight: bold;
 					color: #000000;
 					>view{
 						margin-right: 3%;
@@ -767,7 +789,7 @@
 				@include flexCenter;
 				width: 100%;
 				height: 96rpx;
-				background-color: #006AE3;
+				background-image: linear-gradient(90deg, #0031e3 0%, #d000e3 100%);
 				border-radius: 8rpx;
 				font-size: 34rpx;
 				font-weight: bold;
@@ -809,6 +831,22 @@
 
 		::-webkit-scrollbar {
 			width: 0px;
+		}
+		
+		.equal-division {
+			margin-top: 48rpx;
+		  .equal-division-item {
+		    flex: 1 1 332.69rpx;
+		    width: 332.69rpx;
+		    height: 325rpx;
+		  }
+		}
+		.space-x-12 {
+		  & > view:not(:first-child),
+		  & > text:not(:first-child),
+		  & > image:not(:first-child) {
+		    margin-left: 23.08rpx;
+		  }
 		}
 	}
 </style>

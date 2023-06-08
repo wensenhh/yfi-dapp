@@ -1,6 +1,6 @@
  
 //测试
-// const IP = 'sapi.ziwuyin.com';
+// const IP = '175.178.52.135';
 
 //正式
 const IP = 'user.parisn.club';

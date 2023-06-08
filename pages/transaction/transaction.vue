@@ -358,7 +358,7 @@
 					.button {
 						margin: 23.08rpx 15.38rpx 0;
 						padding: 30.77rpx 0;
-						background-color: #006ae3;
+						background-image: linear-gradient(90deg, #0031e3 0%, #d000e3 100%);
 						border-radius: 7.69rpx;
 					}
 				}

@@ -12,7 +12,6 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "%index.pledgerecord%",
-                "enablePullDownRefresh": false,
 				"onReachBottomDistance": 150,
 				"enablePullDownRefresh": true
             }
@@ -62,6 +61,44 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "我的团队",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/interstation/interstation",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/interstation/detail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "互轉記錄",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/interstation/conversion",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/interstation/converdetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "兑换记录",
                 "enablePullDownRefresh": false
             }
             

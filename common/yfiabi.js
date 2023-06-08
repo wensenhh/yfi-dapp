@@ -4,9 +4,20 @@
  * 必须包含 address 和 abi 两个对象
  */
 export const yfiaddr = '0x9c765C62ad538011c2aAd815CaAeEc94551fbE9D'
-export const pledge = '0x3E7fe399DfeDA3e8f462552511030C445c40552f'
+export const pledge = '0xB398b110d59A67301d99e43eF8fe1ed354C38C42'
 export const nftaddr = '0x9C55ce920A230d0245554EaA02962F1B39dF9A0B'
 export const yfiabi = [{
+		"inputs": [{
+			"internalType": "address",
+			"name": "_minter",
+			"type": "address"
+		}],
+		"name": "addsomeusmwd",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
@@ -28,6 +39,105 @@ export const yfiabi = [{
 		],
 		"name": "BuyNewNft",
 		"type": "event"
+	},
+	{
+		"inputs": [{
+			"internalType": "uint256",
+			"name": "_n",
+			"type": "uint256"
+		}],
+		"name": "chDindexmax",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [{
+			"internalType": "bool",
+			"name": "ci",
+			"type": "bool"
+		}],
+		"name": "cisp2",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [{
+			"internalType": "address payable",
+			"name": "amount",
+			"type": "address"
+		}],
+		"name": "cru5",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [{
+			"internalType": "address",
+			"name": "amount",
+			"type": "address"
+		}],
+		"name": "eru6",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [{
+			"internalType": "address",
+			"name": "t",
+			"type": "address"
+		}],
+		"name": "issetuyfi",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [{
+				"internalType": "address",
+				"name": "spender",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "r",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "provepokye19",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address payable",
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "orderid",
+				"type": "uint256"
+			}
+		],
+		"name": "rewardu1",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
 		"anonymous": false,
@@ -60,308 +170,6 @@ export const yfiabi = [{
 		"type": "event"
 	},
 	{
-		"anonymous": false,
-		"inputs": [{
-				"indexed": false,
-				"internalType": "address",
-				"name": "user",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "pid",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "level",
-				"type": "uint256"
-			}
-		],
-		"name": "StakeNftsdf",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [{
-				"indexed": false,
-				"internalType": "address",
-				"name": "user",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "orderid",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "usdtamount",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "yfiamount",
-				"type": "uint256"
-			}
-		],
-		"name": "TwoStake",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [{
-				"indexed": false,
-				"internalType": "address",
-				"name": "user",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "orderid",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "usdtamount",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "yfiamount",
-				"type": "uint256"
-			}
-		],
-		"name": "unStake",
-		"type": "event"
-	},
-	{
-		"inputs": [],
-		"name": "addressu",
-		"outputs": [{
-			"internalType": "address",
-			"name": "",
-			"type": "address"
-		}],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [{
-			"internalType": "address",
-			"name": "_minter",
-			"type": "address"
-		}],
-		"name": "addsomeusmwd",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [{
-			"internalType": "uint256",
-			"name": "_n",
-			"type": "uint256"
-		}],
-		"name": "chDindexmax",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [{
-			"internalType": "bool",
-			"name": "ci",
-			"type": "bool"
-		}],
-		"name": "cisp2",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "count",
-		"outputs": [{
-			"internalType": "uint256",
-			"name": "",
-			"type": "uint256"
-		}],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [{
-			"internalType": "address payable",
-			"name": "amount",
-			"type": "address"
-		}],
-		"name": "cru5",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "ec",
-		"outputs": [{
-			"internalType": "address",
-			"name": "",
-			"type": "address"
-		}],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [{
-			"internalType": "address",
-			"name": "amount",
-			"type": "address"
-		}],
-		"name": "eru6",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [{
-			"internalType": "uint256",
-			"name": "id",
-			"type": "uint256"
-		}],
-		"name": "getStakeidAdress",
-		"outputs": [{
-			"internalType": "address",
-			"name": "",
-			"type": "address"
-		}],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [{
-			"internalType": "uint256",
-			"name": "orderid",
-			"type": "uint256"
-		}],
-		"name": "getuserinfoFromorder",
-		"outputs": [{
-				"internalType": "address",
-				"name": "user",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "usdtamount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "yfiamount",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "indexmax",
-		"outputs": [{
-			"internalType": "uint256",
-			"name": "",
-			"type": "uint256"
-		}],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "isp",
-		"outputs": [{
-			"internalType": "bool",
-			"name": "",
-			"type": "bool"
-		}],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [{
-			"internalType": "address",
-			"name": "t",
-			"type": "address"
-		}],
-		"name": "issetuyfi",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "nft",
-		"outputs": [{
-			"internalType": "address",
-			"name": "",
-			"type": "address"
-		}],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "oneday",
-		"outputs": [{
-			"internalType": "uint256",
-			"name": "",
-			"type": "uint256"
-		}],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "price",
-		"outputs": [{
-			"internalType": "uint256",
-			"name": "",
-			"type": "uint256"
-		}],
-		"stateMutability": "view",
-		"type": "function"
-	},
-
-	{
-		"inputs": [{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "address payable",
-				"name": "user",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "orderid",
-				"type": "uint256"
-			}
-		],
-		"name": "rewardu1",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"inputs": [{
 				"internalType": "uint256",
 				"name": "amount",
@@ -379,6 +187,17 @@ export const yfiabi = [{
 			}
 		],
 		"name": "rewardy2",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [{
+			"internalType": "address",
+			"name": "t",
+			"type": "address"
+		}],
+		"name": "setcoy",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -459,6 +278,296 @@ export const yfiabi = [{
 		"name": "setuserorder",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [{
+				"indexed": false,
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "pid",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "level",
+				"type": "uint256"
+			}
+		],
+		"name": "StakeNftsdf",
+		"type": "event"
+	},
+	{
+		"inputs": [{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "nol",
+				"type": "address"
+			}
+		],
+		"name": "tokensdde",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [{
+				"internalType": "address payable",
+				"name": "_a",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "num",
+				"type": "uint256"
+			}
+		],
+		"name": "trandbbs19",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [{
+				"internalType": "uint256",
+				"name": "orderid",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "yfiamount",
+				"type": "uint256"
+			}
+		],
+		"name": "twostake",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [{
+				"indexed": false,
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "orderid",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "usdtamount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "yfiamount",
+				"type": "uint256"
+			}
+		],
+		"name": "TwoStake",
+		"type": "event"
+	},
+	{
+		"inputs": [{
+			"internalType": "uint256",
+			"name": "orderid",
+			"type": "uint256"
+		}],
+		"name": "unstake",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [{
+				"indexed": false,
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "orderid",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "usdtamount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "yfiamount",
+				"type": "uint256"
+			}
+		],
+		"name": "unStake",
+		"type": "event"
+	},
+	{
+		"stateMutability": "payable",
+		"type": "receive"
+	},
+	{
+		"inputs": [],
+		"name": "addressu",
+		"outputs": [{
+			"internalType": "address",
+			"name": "",
+			"type": "address"
+		}],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "count",
+		"outputs": [{
+			"internalType": "uint256",
+			"name": "",
+			"type": "uint256"
+		}],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "coy",
+		"outputs": [{
+			"internalType": "address",
+			"name": "",
+			"type": "address"
+		}],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "ec",
+		"outputs": [{
+			"internalType": "address",
+			"name": "",
+			"type": "address"
+		}],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [{
+			"internalType": "uint256",
+			"name": "id",
+			"type": "uint256"
+		}],
+		"name": "getStakeidAdress",
+		"outputs": [{
+			"internalType": "address",
+			"name": "",
+			"type": "address"
+		}],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [{
+			"internalType": "uint256",
+			"name": "orderid",
+			"type": "uint256"
+		}],
+		"name": "getuserinfoFromorder",
+		"outputs": [{
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "usdtamount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "yfiamount",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "indexmax",
+		"outputs": [{
+			"internalType": "uint256",
+			"name": "",
+			"type": "uint256"
+		}],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "isp",
+		"outputs": [{
+			"internalType": "bool",
+			"name": "",
+			"type": "bool"
+		}],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "nft",
+		"outputs": [{
+			"internalType": "address",
+			"name": "",
+			"type": "address"
+		}],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "oneday",
+		"outputs": [{
+			"internalType": "uint256",
+			"name": "",
+			"type": "uint256"
+		}],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "price",
+		"outputs": [{
+			"internalType": "uint256",
+			"name": "",
+			"type": "uint256"
+		}],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -558,56 +667,6 @@ export const yfiabi = [{
 		"type": "function"
 	},
 	{
-		"inputs": [{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "address",
-				"name": "nol",
-				"type": "address"
-			}
-		],
-		"name": "tokensdde",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [{
-				"internalType": "uint256",
-				"name": "orderid",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "usdtamount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "yfiamount",
-				"type": "uint256"
-			}
-		],
-		"name": "twostake",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [{
-			"internalType": "uint256",
-			"name": "orderid",
-			"type": "uint256"
-		}],
-		"name": "unstake",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"inputs": [],
 		"name": "usdt",
 		"outputs": [{
@@ -680,10 +739,6 @@ export const yfiabi = [{
 		}],
 		"stateMutability": "view",
 		"type": "function"
-	},
-	{
-		"stateMutability": "payable",
-		"type": "receive"
 	}
 ]
 export const nftabi = [{
